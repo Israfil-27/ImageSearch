@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import SerachBar from './components/SerachBar';
+import AxiosSearch from './components/axios';
+import ImageList from './components/imageList';
 
 function App() {
+  const [image,setImage]=useState([])
+  const handleClick= async (value:string)=>{
+    const result = await AxiosSearch(value)
+    setImage(result)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <SerachBar search={handleClick}/>
+      <ImageList imagesPlaceholder={image}/>
     </div>
   );
-}
+  }
 
 export default App;
+
+
+
+
+
+
